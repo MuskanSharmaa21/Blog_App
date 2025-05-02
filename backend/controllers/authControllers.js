@@ -10,14 +10,14 @@ const AuthController = () =>{
         if (!isUser) {
           const salt = await bcryptjs.genSalt(10);
           const hashedPassword = await bcryptjs.hash(password, salt);
-  
+   
           const newUser = new authModel({
             username,
             email,
             password: hashedPassword,
           });
   
-          const savedUser = await newUser.save();
+          await newUser.save();
           return res.status(200).json({ message: "User registered successfully" });
         } else {
           return res.status(400).json({ message: "Email already exists" });
@@ -38,7 +38,7 @@ const AuthController = () =>{
         if (user) {
           const isMatch = await bcryptjs.compare(password, user.password);
           if (isMatch) {
-            const token = jwt.sign({ userID: user._id }, "abcde", {
+            const token = jwt.sign({ userID: user._id }, process.env.JWT_SECRET, {
               expiresIn: "2d",
             });
             return res.status(200).json({

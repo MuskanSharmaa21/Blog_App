@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import URL from "../services/AppConfig";
 
 const Register = () => {
   const navigate = useNavigate();
@@ -15,7 +16,7 @@ const Register = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post("http://localhost:8000/api/v1/register", input);
+      const res = await axios.post(`${URL}/api/v1/register`, input);
       toast.success(res.data.message || "Registration successful!");
       setTimeout(() => navigate("/login"), 2000);
     } catch (error) {

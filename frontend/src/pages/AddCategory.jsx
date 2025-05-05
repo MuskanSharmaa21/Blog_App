@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import axios from "axios"; 
+import URL from "../services/AppConfig";
 
 const AddCategory = () => {
   const navigate = useNavigate();
@@ -23,7 +24,7 @@ const AddCategory = () => {
     e.preventDefault();
     try {
       const res = await axios.post(
-        "http://localhost:8000/api/v1/add/categories",
+        `${URL}/api/v1/add/categories`,
         formData,
         {
           headers: {

@@ -14,7 +14,7 @@ const CategoryController = ()=>{
     try {
       if (title) {
         const newCategory = new CategoryModel({ title });
-        const savedCategory = await newCategory.save();
+         await newCategory.save();
         return res.status(200).json({ message: "Category added successfully" });
       } else {
         return res.status(400).json({ message: "All fields are required" });

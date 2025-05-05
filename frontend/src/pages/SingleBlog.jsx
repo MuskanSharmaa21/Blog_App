@@ -1,6 +1,7 @@
 import React,{useState,useEffect} from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
+import URL from "../services/AppConfig";
 
 
 const SingleBlog =() =>{
@@ -10,7 +11,7 @@ const SingleBlog =() =>{
   useEffect (()=>{
     const fetchSingleBlog = async() =>{
       const res = await axios.get (
-        `http://localhost:8000/api/v1/get/blog/${id}`, {
+        `${URL}/api/v1/get/blog/${id}`, {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
           },
@@ -26,7 +27,7 @@ const SingleBlog =() =>{
       <div className="col-md-12 d-flex items-center justify-content-center bg-light">
         <div className="row">
           <h1 className="my3">{blog.title}</h1>
-          <img src={`http://localhost:8000/${blog.thumbnail}`} className="img img-responsive img-rounded my-3"/>
+          <img src={`${URL}/${blog.thumbnail}`} className="img img-responsive img-rounded my-3"/>
           <p className="my-3">{blog.description}</p>
 
         </div>

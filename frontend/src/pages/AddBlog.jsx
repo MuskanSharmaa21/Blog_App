@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
+import URL from "../services/AppConfig";
 
 const AddBlog = () => {
   const navigate = useNavigate();
@@ -16,7 +17,7 @@ const AddBlog = () => {
   useEffect(() => {
     const fetchAllCategories = async () => {
       try {
-        const res = await axios.get("http://localhost:8000/api/v1/get/categories", {
+        const res = await axios.get(`${URL}/api/v1/get/categories`, {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
           },
@@ -42,7 +43,7 @@ const AddBlog = () => {
     formData.append("thumbnail", file);
 
     try {
-      const res = await axios.post("http://localhost:8000/api/v1/add/blog", formData, {
+      const res = await axios.post(`${URL}/api/v1/add/blog`, formData, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },

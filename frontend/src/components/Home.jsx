@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import URL from "../services/AppConfig";
 
 const Home = () => {
   const [blogs, setBlogs] = useState([]);
@@ -8,7 +9,7 @@ const Home = () => {
   useEffect(() => {
     const fetchAllBlogs = async () => {
       try {
-        const res = await axios.get("http://localhost:8000/api/v1/get/allblogs", {
+        const res = await axios.get(`${URL}/api/v1/get/allblogs`, {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`
           }
@@ -33,7 +34,7 @@ const Home = () => {
                   <div key={item._id} className="bg-white shadow-md rounded-lg overflow-hidden">
                     <div className="relative group">
                       <img
-                        src={`http://localhost:8000/${item.thumbnail}`}
+                        src={`${URL}/${item.thumbnail}`}
                         alt="Post"
                         className="w-full h-48 object-cover transition duration-300 group-hover:scale-105"
                       />
